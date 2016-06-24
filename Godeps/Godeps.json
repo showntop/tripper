@@ -1,0 +1,6 @@
+{
+	"ImportPath": "github.com/showntop/tripper",
+	"GoVersion": "go1.5",
+	"GodepVersion": "v74",
+	"Deps": []
+}
