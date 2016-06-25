@@ -18,10 +18,15 @@ func Setup() {
 	log.Println("the store started...")
 
 	router := httprouter.New()
+	router.POST("/Users", Home)
 	router.POST("/Users", CreateUsersHandler)
 	router.POST("/Sessions", CreateSessionsHandler)
 	router.GET("/Spots", ListSpotsHandler)
 
 	m := &Middleware{router}
 	log.Fatal(http.ListenAndServe(":9000", m))
+}
+
+func Home(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Write([]byte("this is the root path"))
 }
