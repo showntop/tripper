@@ -21,7 +21,6 @@ func InitMongo() {
 	// Log(url)
 
 	// [mongodb://][user:pass@]host1[:port1][,host2[:port2],...][/database][?options]
-	// url := "mongodb://localhost:27017/tripper"
 	url := "mongodb://showntop:1234567890a@ds023714.mlab.com:23714/tripper"
 
 	var err error
