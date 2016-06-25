@@ -13,6 +13,7 @@ var (
 )
 
 func Setup() {
+	log.Println("starte the server...")
 	//init the store
 	store = stores.NewStore()
 	log.Println("the store started...")
@@ -25,13 +26,13 @@ func Setup() {
 
 	m := &Middleware{router}
 
-	port := os.Getenv("PORT")
+	// port := os.Getenv("PORT")
 
-	if port == "" {
-		log.Fatal("$PORT must be set")
-	}
+	// if port == "" {
+	// 	log.Fatal("$PORT must be set")
+	// }
 
-	log.Fatal(http.ListenAndServe(":"+port, m))
+	log.Fatal(http.ListenAndServe(":"+9000, m))
 }
 
 func Home(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
