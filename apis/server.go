@@ -24,7 +24,14 @@ func Setup() {
 	router.GET("/Spots", ListSpotsHandler)
 
 	m := &Middleware{router}
-	log.Fatal(http.ListenAndServe(":9000", m))
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	log.Fatal(http.ListenAndServe(":"+port, m))
 }
 
 func Home(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
