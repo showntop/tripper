@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	log.Println("hello i'm here")
-	log.Println("hello i'm here22")
+	log.Println("hello i'm shwontop")
 	apis.Setup()
 }
