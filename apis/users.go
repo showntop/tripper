@@ -6,7 +6,9 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
+	"github.com/showntop/tripper/errors"
 	"github.com/showntop/tripper/models"
+	"github.com/showntop/tripper/serializers"
 )
 
 func CreateUsersHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -19,6 +21,11 @@ func CreateUsersHandler(rw http.ResponseWriter, req *http.Request, ps httprouter
 		rw.Write([]byte(err.ToJson()))
 		return
 	}
-
-	rw.Write([]byte(user.ToJson()))
+	response, errs := serializers.MarshalObjectPayload(user)
+	if errs != nil {
+		rw.WriteHeader(http.StatusInternalServerError)
+		rw.Write([]byte(errors.NewServerError(errs.Error()).ToJson()))
+		return
+	}
+	rw.Write(response)
 }

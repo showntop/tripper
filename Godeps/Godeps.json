@@ -13,6 +13,10 @@
 			"Rev": "3ad29d1ad1c4f2023e355603324348cf1f4b2d48"
 		},
 		{
+			"ImportPath": "github.com/gedex/inflector",
+			"Rev": "91797f1712fd58f224781be1080b8613d096187e"
+		},
+		{
 			"ImportPath": "github.com/julienschmidt/httprouter",
 			"Comment": "v1.1-29-g77366a4",
 			"Rev": "77366a47451a56bb3ba682481eed85b64fea14e8"

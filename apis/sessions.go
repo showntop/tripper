@@ -6,7 +6,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/showntop/tripper/errors"
-	// "github.com/showntop/tripper/models"
+	"github.com/showntop/tripper/serializers"
 )
 
 func CreateSessionsHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -24,6 +24,11 @@ func CreateSessionsHandler(rw http.ResponseWriter, req *http.Request, ps httprou
 		rw.Write([]byte(errors.NewAuthError("用户名或密码错误").ToJson()))
 		return
 	}
-	rw.Write([]byte(user.ToJson()))
-	log.Println("aaaaa2")
+	response, err := serializers.MarshalObjectPayload(user)
+	if err != nil {
+		rw.WriteHeader(http.StatusInternalServerError)
+		rw.Write([]byte(errors.NewServerError(err.Error()).ToJson()))
+		return
+	}
+	rw.Write(response)
 }

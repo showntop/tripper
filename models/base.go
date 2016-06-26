@@ -7,7 +7,7 @@ import (
 )
 
 type BaseModel struct {
-	Id        bson.ObjectId `bson:"_id,omitempty" json:"id"` // 必须要设置bson:"_id" 不然mgo不会认为是主键
+	Id        bson.ObjectId `bson:"_id,omitempty" json:"id" jsonapi:"primary"` // 必须要设置bson:"_id" 不然mgo不会认为是主键
 	CreatedAt time.Time     `bson:"created_at" json:"created_at"`
 	UpdatedAt time.Time     `bson:"updated_at" json:"-"`
 	DeletedAt *time.Time    `bson:"deleted_at" json:"-"`

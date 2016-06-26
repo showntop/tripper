@@ -29,7 +29,8 @@ func Setup() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		port = "9000"
+		// log.Fatal("$PORT must be set")
 	}
 	log.Println("Server started at " + port)
 

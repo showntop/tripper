@@ -14,10 +14,10 @@ import (
 )
 
 type User struct {
-	BaseModel         `bson:",inline"`
-	Username          string `bson:"username" json:"username"` // 不区分大小写, 全是小写
-	Email             string `bson:"email" json:"email"`       // 全是小写
-	Mobile            string `bson:"mobile" json:"mobile"`     // 全是小写
+	BaseModel         `bson:",inline" jsonapi:"inline,"`
+	Username          string `bson:"username" jsonapi:"attr,username"` // 不区分大小写, 全是小写
+	Email             string `bson:"email" jsonapi:"attr,email"`       // 全是小写
+	Mobile            string `bson:"mobile" jsonapi:"attr,mobile"`     // 全是小写
 	Password          string `bson:"-" json:"-"`
 	EncryptedPassword string `bson:"encrypted_password" json:"-"`
 }
