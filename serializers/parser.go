@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"gopkg.in/mgo.v2/bson"
 )
 
 var (
@@ -22,7 +24,6 @@ func parseRootToNode(model interface{}, included *map[string]*Node, sideload boo
 
 //parse the model to a node struct for json api format spec
 func parseToNode(model interface{}, node *Node, included *map[string]*Node, sideload bool) (err error) {
-	_ = "breakpoint"
 	modelValue := reflect.ValueOf(model).Elem()
 	for i := 0; i < modelValue.NumField(); i++ {
 
@@ -48,12 +49,15 @@ func parseToNode(model interface{}, node *Node, included *map[string]*Node, side
 		switch usage {
 		case "inline":
 			// if structField.Type.Kind() == reflect.Struct {
-			parseToNode(fieldValue, node, included, sideload)
+			parseToNode(fieldValue.Addr().Interface(), node, included, sideload)
 			// }
 		case "primary":
 			id := fieldValue.Interface()
-
+			// idType := id.(type)
+			// _ = idType
 			switch nId := id.(type) {
+			case bson.ObjectId:
+				node.Id = nId.Hex()
 			case string:
 				node.Id = nId
 			case int:
