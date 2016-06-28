@@ -1,7 +1,6 @@
 package apis
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -10,9 +9,24 @@ import (
 )
 
 func CreateSessionsHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	log.Println("aaaaa1")
 
 	//validate allowed params key and value and type
+	var login interface{}
+	var ok bool
+	if login, ok = params["login"]; ok {
+		//string type
+		if login, ok = login.(string); ok {
+
+		} else {
+			renderError(rw, errors.NewValidateError("login param type error"), http.StatusBadRequest)
+			return
+		}
+	} else {
+		renderError(rw, errors.NewValidateError("login param is needed"), http.StatusBadRequest)
+		return
+	}
+
+	//logic
 	user := store.User.FindByAny(params["login"])
 	if user.Id == "" {
 		rw.WriteHeader(http.StatusNotFound)

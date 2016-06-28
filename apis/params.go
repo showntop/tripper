@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	params map[string]string
+	params map[string]interface{}
 )
 
 // var (
@@ -16,7 +16,7 @@ var (
 // )
 
 func ParseParams(data io.Reader) error {
-	params = make(map[string]string)
+	params = make(map[string]interface{})
 	decoder := json.NewDecoder(data)
 	err := decoder.Decode(&params)
 	if err != nil {

@@ -18,8 +18,8 @@ type ErrorPayload struct {
 	Errors []*ErrorNode `json:"errors"`
 }
 
-func render(rw http.ResponseWriter) {
-
+func render(rw http.ResponseWriter, data []byte) {
+	rw.Write(data)
 }
 
 func renderError(rw http.ResponseWriter, err error, errorCode int) {
