@@ -17,8 +17,7 @@ func (m *Middleware) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	err := ParseParams(req.Body)
 	rw.Header().Set("Content-Type", "application/json")
 	if err != nil {
-		rw.WriteHeader(http.StatusInternalServerError)
-		rw.Write([]byte(err.ToJson()))
+		renderError(rw, err, http.StatusInternalServerError)
 		return
 	}
 	log.Printf("%v", params)

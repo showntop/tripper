@@ -4,20 +4,23 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/showntop/tripper/errors"
+	// "github.com/showntop/tripper/errors"
 )
 
 var (
 	params map[string]string
 )
 
-func ParseParams(data io.Reader) errors.SunError {
+// var (
+// 	ErrParseRequestParams = errors.New("Bad jsonapi struct tag format")
+// )
+
+func ParseParams(data io.Reader) error {
 	params = make(map[string]string)
 	decoder := json.NewDecoder(data)
 	err := decoder.Decode(&params)
 	if err != nil {
-		return errors.NewServerError("parse req json error")
+		return err //errors.NewServerError(err.Error())
 	}
-	//validate allowed params key and value and type
 	return nil
 }

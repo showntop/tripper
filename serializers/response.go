@@ -4,6 +4,10 @@ import (
 	"encoding/json"
 )
 
+// func MarshalErrorPayload(errors []interface) ([]byte, error){
+
+// }
+
 func MarshalObjectPayload(model interface{}) ([]byte, error) {
 	included := make(map[string]*Node)
 

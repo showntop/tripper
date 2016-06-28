@@ -9,10 +9,14 @@ import (
 	"github.com/showntop/tripper/errors"
 	"github.com/showntop/tripper/models"
 	"github.com/showntop/tripper/serializers"
+	"github.com/showntop/tripper/utils"
 )
 
 func CreateUsersHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	log.Println("route handle")
+	utils.Vd("mobile", params["mobile"])
+	utils.Vd("password", params["password"])
+	// Require("mobile", string, )
 	user, err := models.NewUser(params["mobile"], params["password"])
 
 	err = store.User.Save(user)
