@@ -14,10 +14,10 @@ import (
 
 func CreateUsersHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	log.Println("route handle")
-	utils.Vd("mobile", params["mobile"])
-	utils.Vd("password", params["password"])
+	utils.Vd("mobile", params["mobile"].(string))
+	utils.Vd("password", params["password"].(string))
 	// Require("mobile", string, )
-	user, err := models.NewUser(params["mobile"], params["password"])
+	user, err := models.NewUser(params["mobile"].(string), params["password"].(string))
 
 	err = store.User.Save(user)
 	if err != nil {

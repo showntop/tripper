@@ -11,6 +11,7 @@ type Store struct {
 
 	User *UserStore
 	// Relationship *RelationshipStore
+	Spot *SpotStore
 }
 
 func NewStore() *Store {
@@ -21,6 +22,7 @@ func NewStore() *Store {
 
 	store.User = NewUserStore(store)
 	// store.Relationship = &RelationshipStore{store.Master.C("relationships")}
+	store.Spot = NewSpotStore(store)
 
 	return store
 }

@@ -23,6 +23,7 @@ func Setup() {
 	router.POST("/Users", CreateUsersHandler)
 	router.POST("/Sessions", CreateSessionsHandler)
 	router.GET("/Spots", ListSpotsHandler)
+	router.POST("/Spots", CreateSpotsHandler)
 
 	m := &Middleware{router}
 

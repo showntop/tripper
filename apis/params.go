@@ -3,7 +3,7 @@ package apis
 import (
 	"encoding/json"
 	"io"
-
+	"reflect"
 	// "github.com/showntop/tripper/errors"
 )
 
@@ -23,4 +23,29 @@ func ParseParams(data io.Reader) error {
 		return err //errors.NewServerError(err.Error())
 	}
 	return nil
+}
+
+func Require(fieldName string, fieldType reflect.Kind, args ...interface{}) error {
+	if _, ok := params[fieldName]; !ok {
+		return NewParamsError("params" + fieldName + "is missing")
+	}
+	if reflect.TypeOf(params[fieldName]).Kind() != fieldType {
+		return NewParamsError("params" + fieldName + "type is wrong")
+	}
+	return nil
+	// ruleTag = args[0]
+	// ruleFun = args[1]
+}
+
+func Optional(fieldName string, fieldType reflect.Kind, args ...interface{}) error {
+	if _, ok := params[fieldName]; !ok {
+		params[fieldName] = ""
+		return nil
+	}
+	if reflect.TypeOf(params[fieldName]).Kind() != fieldType {
+		return NewParamsError("params" + fieldName + "type is wrong")
+	}
+	return nil
+	// ruleTag = args[0]
+	// ruleFun = args[1]
 }

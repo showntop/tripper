@@ -18,21 +18,21 @@ func CreateSessionsHandler(rw http.ResponseWriter, req *http.Request, ps httprou
 		if login, ok = login.(string); ok {
 
 		} else {
-			renderError(rw, errors.NewValidateError("login param type error"), http.StatusBadRequest)
+			renderError(rw, NewParamsError("login param type error"), http.StatusBadRequest)
 			return
 		}
 	} else {
-		renderError(rw, errors.NewValidateError("login param is needed"), http.StatusBadRequest)
+		renderError(rw, NewParamsError("login param is needed"), http.StatusBadRequest)
 		return
 	}
 
 	//logic
-	user := store.User.FindByAny(params["login"])
+	user := store.User.FindByAny(params["login"].(string))
 	if user.Id == "" {
 		rw.WriteHeader(http.StatusNotFound)
 		return
 	}
-	matched := user.AuthPassword(params["password"])
+	matched := user.AuthPassword(params["password"].(string))
 	if !matched {
 		rw.WriteHeader(http.StatusUnauthorized)
 		rw.Write([]byte(errors.NewAuthError("用户名或密码错误").ToJson()))
