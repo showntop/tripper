@@ -19,6 +19,7 @@ type ErrorPayload struct {
 }
 
 func render(rw http.ResponseWriter, data []byte) {
+	rw.Header().Set("Content-Type", "application/json")
 	rw.Write(data)
 }
 
@@ -30,6 +31,7 @@ func renderError(rw http.ResponseWriter, err error, errorCode int) {
 	if err != nil {
 		log.Println("error:", err)
 	}
+	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(errorCode)
 	rw.Write(b)
 }

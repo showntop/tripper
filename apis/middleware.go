@@ -14,9 +14,10 @@ type Middleware struct {
 func (m *Middleware) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	log.Println("===========================")
 	log.Println(req.Method + "------" + req.URL.Path)
+	log.Printf("%v", req)
 	err := ParseParams(req.Body)
-	rw.Header().Set("Content-Type", "application/json")
 	if err != nil {
+		log.Printf("%v", err)
 		renderError(rw, err, http.StatusInternalServerError)
 		return
 	}

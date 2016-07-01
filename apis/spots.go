@@ -11,7 +11,21 @@ import (
 )
 
 func ListSpotsHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-
+	var err error
+	spots := make([]*models.Spot, 0)
+	err = store.Spot.List(&spots)
+	if err != nil {
+		renderError(rw, err, http.StatusInternalServerError)
+	}
+	ispots := make([]interface{}, len(spots))
+	for i := range spots {
+		ispots[i] = spots[i]
+	}
+	data, err := serializers.MarshalManyPayload(ispots)
+	if err != nil {
+		renderError(rw, err, http.StatusInternalServerError)
+	}
+	render(rw, data)
 }
 
 func CreateSpotsHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {

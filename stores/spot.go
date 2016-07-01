@@ -2,7 +2,7 @@ package stores
 
 import (
 	"gopkg.in/mgo.v2"
-	// "gopkg.in/mgo.v2/bson"
+	"gopkg.in/mgo.v2/bson"
 
 	"github.com/showntop/tripper/models"
 )
@@ -23,6 +23,14 @@ func (ss *SpotStore) Save(spot *models.Spot) error {
 	err := ss.Collection.Insert(spot)
 	if err != nil {
 		return NewStoreError(err.Error())
+	}
+	return nil
+}
+
+func (ss *SpotStore) List(spots *[]*models.Spot) error {
+	err := ss.Collection.Find(bson.M{}).All(spots)
+	if err != nil {
+		return err
 	}
 	return nil
 }

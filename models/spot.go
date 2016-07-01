@@ -1,7 +1,7 @@
 package models
 
 type Spot struct {
-	BaseModel
+	BaseModel   `bson:",inline" jsonapi:"inline,"`
 	Title       string `jsonapi:"attr,title"`
 	Description string `jsonapi:"attr,description"`
 }

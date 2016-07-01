@@ -19,8 +19,11 @@ func ParseParams(data io.Reader) error {
 	params = make(map[string]interface{})
 	decoder := json.NewDecoder(data)
 	err := decoder.Decode(&params)
-	if err != nil {
-		return err //errors.NewServerError(err.Error())
+	switch {
+	case err == io.EOF: //empty body
+		return nil
+	case err != nil:
+		return err
 	}
 	return nil
 }

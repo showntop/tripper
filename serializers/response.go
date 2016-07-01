@@ -2,6 +2,7 @@ package serializers
 
 import (
 	"encoding/json"
+	"log"
 )
 
 // func MarshalErrorPayload(errors []interface) ([]byte, error){
@@ -32,7 +33,7 @@ func MarshalManyPayload(models []interface{}) ([]byte, error) {
 
 	for i := 0; i < len(models); i++ {
 		model := models[i]
-
+		log.Printf("%v", model)
 		node, err := parseRootToNode(model, &included, true)
 		if err != nil {
 			return nil, err
