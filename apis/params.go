@@ -3,7 +3,12 @@ package apis
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
+	"log"
+	"mime/multipart"
+	"net/http"
 	"reflect"
+	"strings"
 	// "github.com/showntop/tripper/errors"
 )
 
@@ -15,7 +20,7 @@ var (
 // 	ErrParseRequestParams = errors.New("Bad jsonapi struct tag format")
 // )
 
-func ParseParams(data io.Reader) error {
+func ParseJson(data io.Reader) error {
 	params = make(map[string]interface{})
 	decoder := json.NewDecoder(data)
 	err := decoder.Decode(&params)
@@ -24,6 +29,47 @@ func ParseParams(data io.Reader) error {
 		return nil
 	case err != nil:
 		return err
+	}
+	return nil
+}
+
+func ParseMultiPart2(req *http.Request) error {
+	params = make(map[string]interface{})
+	err := req.ParseMultipartForm(0)
+	if err != nil {
+		return err
+	}
+	log.Printf("%v", req.MultipartForm)
+	for key, value := range req.MultipartForm.Value {
+		params[key] = value
+	}
+	for key, file := range req.MultipartForm.File {
+		params[key] = file
+	}
+	return nil
+}
+
+func ParseMultiPart(data *multipart.Reader) error {
+	for {
+		p, err := data.NextPart()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			log.Fatal(err)
+			return err
+		}
+		contentType := p.Header.Get("Content-Type")
+		switch {
+		case strings.Contains(contentType, "application/json"):
+			//ParseJson()
+		}
+		slurp, err := ioutil.ReadAll(p)
+		if err != nil {
+			log.Fatal(err)
+			return err
+		}
+		_ = slurp
 	}
 	return nil
 }

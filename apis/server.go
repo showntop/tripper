@@ -25,6 +25,8 @@ func Setup() {
 	router.GET("/Spots", ListSpotsHandler)
 	router.POST("/Spots", CreateSpotsHandler)
 
+	router.PUT("/Spots/:id/Covers/current", CreateOrUpdateCoversHandler)
+
 	m := &Middleware{router}
 
 	port := os.Getenv("PORT")
