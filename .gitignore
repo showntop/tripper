@@ -22,5 +22,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+<<<<<<< HEAD
 .env
 /public
+=======
+>>>>>>> c5eef7bf0489b94ea6d1689099ff0c9835b8a612
