@@ -1,0 +1,63 @@
+{
+	"ImportPath": "github.com/showntop/journey",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.10.0-38-g3ec0642",
+			"Rev": "3ec0642a7fb6488f65b06f9040adc67e3990296a"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/inflection",
+			"Rev": "74387dc39a75e970e7a3ae6a3386b5bd2e5c5cff"
+		},
+		{
+			"ImportPath": "github.com/julienschmidt/httprouter",
+			"Comment": "v1.1-34-gd8ff598",
+			"Rev": "d8ff598a019f2c7bad0980917a588193cf26666e"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/bcrypt",
+			"Rev": "9fbab14f903f89e23047b5971369b86380230e56"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "9fbab14f903f89e23047b5971369b86380230e56"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "c200b10b5d5e122be351b67af224adc6128af5bf"
+		},
+		{
+			"ImportPath": "gopkg.in/pg.v5",
+			"Comment": "v5.0.10",
+			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+		},
+		{
+			"ImportPath": "gopkg.in/pg.v5/internal",
+			"Comment": "v5.0.10",
+			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+		},
+		{
+			"ImportPath": "gopkg.in/pg.v5/internal/parser",
+			"Comment": "v5.0.10",
+			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+		},
+		{
+			"ImportPath": "gopkg.in/pg.v5/internal/pool",
+			"Comment": "v5.0.10",
+			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+		},
+		{
+			"ImportPath": "gopkg.in/pg.v5/orm",
+			"Comment": "v5.0.10",
+			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+		},
+		{
+			"ImportPath": "gopkg.in/pg.v5/types",
+			"Comment": "v5.0.10",
+			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+		}
+	]
+}

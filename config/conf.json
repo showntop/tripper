@@ -1,0 +1,27 @@
+{
+	"host":{
+		
+	},
+	"database":{
+		"addrs":     "127.0.0.1:27017",
+		"user":     "",
+		"password": "",
+		"dbname":   "tripper"
+	},
+	"redis": {
+        "addr": ["",""],
+        "passwd": "",
+        "poolsize": 10,
+        "idletimeout": 300,
+        "dialtimeout": 10,
+        "readtimeout": 5,
+        "writetimeout": 10
+    },
+	"default_locale": "zh-cn",
+	"log_level": 5,
+	"env": "develop",
+	"log_path":"./log/develop.log",
+    "tmpl_path": "./views",
+    "i18n_path": "",
+	"server_port": ":7007"
+}
