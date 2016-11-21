@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/showntop/journey",
+	"ImportPath": "github.com/showntop/tripper",
 	"GoVersion": "go1.7",
 	"GodepVersion": "v74",
 	"Deps": [
@@ -7,10 +7,6 @@
 			"ImportPath": "github.com/Sirupsen/logrus",
 			"Comment": "v0.10.0-38-g3ec0642",
 			"Rev": "3ec0642a7fb6488f65b06f9040adc67e3990296a"
-		},
-		{
-			"ImportPath": "github.com/jinzhu/inflection",
-			"Rev": "74387dc39a75e970e7a3ae6a3386b5bd2e5c5cff"
 		},
 		{
 			"ImportPath": "github.com/julienschmidt/httprouter",
@@ -26,38 +22,94 @@
 			"Rev": "9fbab14f903f89e23047b5971369b86380230e56"
 		},
 		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "4971afdc2f162e82d185353533d3cf16188a9f4e"
+		},
+		{
 			"ImportPath": "golang.org/x/sys/unix",
 			"Rev": "c200b10b5d5e122be351b67af224adc6128af5bf"
 		},
 		{
-			"ImportPath": "gopkg.in/pg.v5",
-			"Comment": "v5.0.10",
-			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
 		},
 		{
-			"ImportPath": "gopkg.in/pg.v5/internal",
-			"Comment": "v5.0.10",
-			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+			"ImportPath": "gopkg.in/mgo.v2/bson",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
 		},
 		{
-			"ImportPath": "gopkg.in/pg.v5/internal/parser",
-			"Comment": "v5.0.10",
-			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+			"ImportPath": "gopkg.in/mgo.v2/internal/json",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
 		},
 		{
-			"ImportPath": "gopkg.in/pg.v5/internal/pool",
-			"Comment": "v5.0.10",
-			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+			"ImportPath": "gopkg.in/mgo.v2/internal/sasl",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
 		},
 		{
-			"ImportPath": "gopkg.in/pg.v5/orm",
-			"Comment": "v5.0.10",
-			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+			"ImportPath": "gopkg.in/mgo.v2/internal/scram",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
 		},
 		{
-			"ImportPath": "gopkg.in/pg.v5/types",
-			"Comment": "v5.0.10",
-			"Rev": "b2b1db522c4bc37ef62ac568f7e437bd3aa96f6f"
+			"ImportPath": "qiniupkg.com/api.v7/api",
+			"Comment": "v7.0.5-28-gad7023b",
+			"Rev": "ad7023b87b2f5c169812da49fe44900be1c4e5c2"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/auth/qbox",
+			"Comment": "v7.0.5-28-gad7023b",
+			"Rev": "ad7023b87b2f5c169812da49fe44900be1c4e5c2"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/conf",
+			"Comment": "v7.0.5-28-gad7023b",
+			"Rev": "ad7023b87b2f5c169812da49fe44900be1c4e5c2"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/kodo",
+			"Comment": "v7.0.5-28-gad7023b",
+			"Rev": "ad7023b87b2f5c169812da49fe44900be1c4e5c2"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/kodocli",
+			"Comment": "v7.0.5-28-gad7023b",
+			"Rev": "ad7023b87b2f5c169812da49fe44900be1c4e5c2"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/bytes.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/bytes.v7/seekable",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/ctype.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/log.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/reqid.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/rpc.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/url.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/xlog.v7",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		}
 	]
 }

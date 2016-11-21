@@ -28,5 +28,7 @@ func Instrument() *httprouter.Router {
 	router.POST("/api/v1/projects", createProject)
 	router.GET("/api/v1/projects/:id", showProject)
 
+	router.POST("/api/v1/qntokens", createQntoken)
+
 	return router
 }

@@ -42,3 +42,15 @@ func showProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	}
 	rw.Write(results)
 }
+
+func createQntoken(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	qntokensC := new(controllers.Qntokens)
+	results, err := qntokensC.Create()
+	if err != nil {
+		// http.Error(rw, err.Error(), err.Code)
+		rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
