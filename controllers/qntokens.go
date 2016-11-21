@@ -25,5 +25,8 @@ func (q *Qntokens) Create() ([]byte, *HttpError) {
 	}
 	//生成一个上传token
 	token := c.MakeUptoken(policy)
-	return []byte(token), nil
+	return WrapResp(map[string]string{
+		"uptoken":    token,
+		"expired_at": "10",
+	})
 }
