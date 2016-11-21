@@ -67,3 +67,13 @@ func GetProjectDaily() (*Project, error) {
 
 	return result, err
 }
+
+func GetProjectById(id string) (*Project, error) {
+	sess := MgoSess()
+	defer sess.Close()
+
+	result := new(Project)
+	err := sess.DB(DBNAME).C(C_PROJECT_NAME).FindId(bson.ObjectIdHex(id)).One(result)
+
+	return result, err
+}

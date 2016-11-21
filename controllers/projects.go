@@ -28,7 +28,11 @@ func (p *Projects) List(req *http.Request) ([]byte, *HttpError) {
 }
 
 func (p *Projects) Show(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
-	return nil, nil
+	data, err := models.GetProjectById(ps.ByName("id"))
+	if err != nil {
+		return nil, DBErr
+	}
+	return WrapResp(data)
 }
 
 func (p *Projects) Create(req *http.Request) ([]byte, *HttpError) {
