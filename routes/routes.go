@@ -24,6 +24,9 @@ func WrapErrorResp(err *controllers.HttpError) []byte {
 func Instrument() *httprouter.Router {
 	router := httprouter.New()
 
+	router.GET("/api/v1/albums", listAlbum)
+	router.POST("/api/v1/albums", createAlbum)
+
 	router.GET("/api/v1/projects", listProject)
 	router.POST("/api/v1/projects", createProject)
 	router.GET("/api/v1/projects/:id", showProject)

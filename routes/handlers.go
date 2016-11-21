@@ -7,13 +7,37 @@ import (
 	"github.com/showntop/tripper/controllers"
 )
 
+func listAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	albumsC := new(controllers.Albums)
+	results, err := albumsC.List(req)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
+func createAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	albumsC := new(controllers.Albums)
+	results, err := albumsC.Create(req)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
 func listProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	projectsC := new(controllers.Projects)
 	results, err := projectsC.List(req)
 	if err != nil {
-		// http.Error(rw, err.Error(), err.Code)
-		rw.Write(WrapErrorResp(err))
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
 		return
 	}
 	rw.Write(results)
@@ -24,8 +48,8 @@ func createProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	projectsC := new(controllers.Projects)
 	results, err := projectsC.Create(req)
 	if err != nil {
-		// http.Error(rw, err.Error(), err.Code)
-		rw.Write(WrapErrorResp(err))
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
 		return
 	}
 	rw.Write(results)
@@ -36,8 +60,8 @@ func showProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	projectsC := new(controllers.Projects)
 	results, err := projectsC.Show(req, ps)
 	if err != nil {
-		// http.Error(rw, err.Error(), err.Code)
-		rw.Write(WrapErrorResp(err))
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
 		return
 	}
 	rw.Write(results)
@@ -48,8 +72,8 @@ func createQntoken(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	qntokensC := new(controllers.Qntokens)
 	results, err := qntokensC.Create()
 	if err != nil {
-		// http.Error(rw, err.Error(), err.Code)
-		rw.Write(WrapErrorResp(err))
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
 		return
 	}
 	rw.Write(results)
