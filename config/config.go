@@ -13,7 +13,7 @@ type configure struct {
 	DefaultLocale string                 `json:"default_locale"`
 	ServerPort    string                 `json:"server_port"`
 	I18nPath      string                 `json:"i18n_path"`
-	Env           string                 `json:"env"`
+	Env           string                 `json:"-"`
 	TmplPath      string                 `json:"tmpl_path"`
 	LogPath       string                 `json:"log_path"`
 	LogLevel      log.Level              `json:"log_level"`
@@ -26,10 +26,12 @@ var (
 )
 
 func init() {
-	confPath := flag.String("c", "./config/conf.json", "Config file")
+	confEnv := flag.String("e", "develop", "Env mode")
 	flag.Parse()
 	//load conf
-	log.Debug("log file:" + *confPath)
+	Config.Env = *confEnv
+	confPath := flag.String("c", "./config/conf."+*confEnv+".json", "Config file")
+
 	configFile, err := os.Open(*confPath)
 	if err != nil {
 		fmt.Println("opening config file", err.Error())
