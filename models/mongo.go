@@ -4,6 +4,7 @@ import (
 	"strings"
 	"time"
 
+	log "github.com/Sirupsen/logrus"
 	"gopkg.in/mgo.v2"
 
 	. "github.com/showntop/tripper/config"
@@ -20,8 +21,7 @@ func MgoSess() *mgo.Session {
 }
 
 func init() {
-	// url := beego.AppConfig.String("mongodb::url")
-
+	log.Infoln("...................mongo..................")
 	sess, err := mgo.DialWithInfo(&mgo.DialInfo{
 		Addrs:    strings.Split(Config.Database["addrs"].(string), "|"),
 		Timeout:  15 * time.Second,
@@ -32,7 +32,8 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
+	log.Infof("addr: %s", Config.Database["addrs"].(string))
+	log.Infoln("...................mongo..................")
 	session = sess
 	session.SetMode(mgo.Monotonic, true)
 	createIndexes()

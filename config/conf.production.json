@@ -3,9 +3,9 @@
 		
 	},
 	"database":{
-		"addrs":     "127.0.0.1:27017",
-		"user":     "",
-		"password": "",
+		"addrs":     "ds147777.mlab.com:47777",
+		"user":     "showntop",
+		"password": "xrt310214@tz",
 		"dbname":   "tripper"
 	},
 	"redis": {
@@ -19,6 +19,7 @@
     },
 	"default_locale": "zh-cn",
 	"log_level": 5,
+	"env": "develop",
 	"log_path":"./log/develop.log",
     "tmpl_path": "./views",
     "i18n_path": "",

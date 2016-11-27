@@ -12,7 +12,7 @@ func listAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	albumsC := new(controllers.Albums)
 	results, err := albumsC.List(req)
 	if err != nil {
-		http.Error(rw, WrapErrorResp(err), err.Code)
+		http.Error(rw, err.Error(), err.Code)
 		// rw.Write(WrapErrorResp(err))
 		return
 	}
@@ -24,7 +24,7 @@ func createAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	albumsC := new(controllers.Albums)
 	results, err := albumsC.Create(req)
 	if err != nil {
-		http.Error(rw, WrapErrorResp(err), err.Code)
+		http.Error(rw, err.Error(), err.Code)
 		// rw.Write(WrapErrorResp(err))
 		return
 	}
@@ -36,7 +36,7 @@ func listProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	projectsC := new(controllers.Projects)
 	results, err := projectsC.List(req)
 	if err != nil {
-		http.Error(rw, WrapErrorResp(err), err.Code)
+		http.Error(rw, err.Error(), err.Code)
 		// rw.Write(WrapErrorResp(err))
 		return
 	}
@@ -48,7 +48,7 @@ func createProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	projectsC := new(controllers.Projects)
 	results, err := projectsC.Create(req)
 	if err != nil {
-		http.Error(rw, WrapErrorResp(err), err.Code)
+		http.Error(rw, err.Error(), err.Code)
 		// rw.Write(WrapErrorResp(err))
 		return
 	}
@@ -60,7 +60,7 @@ func showProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	projectsC := new(controllers.Projects)
 	results, err := projectsC.Show(req, ps)
 	if err != nil {
-		http.Error(rw, WrapErrorResp(err), err.Code)
+		http.Error(rw, err.Error(), err.Code)
 		// rw.Write(WrapErrorResp(err))
 		return
 	}
@@ -72,7 +72,7 @@ func createQntoken(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	qntokensC := new(controllers.Qntokens)
 	results, err := qntokensC.Create()
 	if err != nil {
-		http.Error(rw, WrapErrorResp(err), err.Code)
+		http.Error(rw, err.Error(), err.Code)
 		// rw.Write(WrapErrorResp(err))
 		return
 	}

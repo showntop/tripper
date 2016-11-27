@@ -31,7 +31,7 @@ func init() {
 	//load conf
 	Config.Env = *confEnv
 	confPath := flag.String("c", "./config/conf."+*confEnv+".json", "Config file")
-
+	fmt.Println(*confPath)
 	configFile, err := os.Open(*confPath)
 	if err != nil {
 		fmt.Println("opening config file", err.Error())

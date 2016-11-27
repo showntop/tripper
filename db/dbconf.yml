@@ -1,3 +1,0 @@
-development:
-    driver: postgres
-    open: host=ec2-54-243-201-19.compute-1.amazonaws.com user=ynazkzqhiihmle dbname=dbl153jnanfv0h password=sLlrp2_gLeJCoGYvVXt3Ts1jNY sslmode=require
