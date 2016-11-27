@@ -807,5 +807,8 @@ User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (
 
 
  
+<<<<<<< HEAD
+=======
 [34mINFO[0m[0000] starting in development on :7007              [34mtime[0m=2016-11-23 14:53:34.150950452 +0800 CST
 [34mINFO[0m[0000] starting in development on :7007              [34mtime[0m=2016-11-23 14:54:06.52357734 +0800 CST
+>>>>>>> 63ab469b6c58c57acadb2da801c48e91789fb50c

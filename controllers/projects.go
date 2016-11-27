@@ -11,7 +11,7 @@ import (
 )
 
 type Projects struct {
-	*application
+	application
 }
 
 func (p *Projects) List(req *http.Request) ([]byte, *HttpError) {
@@ -36,12 +36,17 @@ func (p *Projects) Show(req *http.Request, ps httprouter.Params) ([]byte, *HttpE
 }
 
 func (p *Projects) Create(req *http.Request) ([]byte, *HttpError) {
+	if err := p.AuthUser(req); err != nil {
+		log.Warnln(err)
+		return nil, UnAuthErr
+	}
 	var v models.Project
 	decoder := json.NewDecoder(req.Body)
 	err := decoder.Decode(&v)
 	if err != nil {
 		return nil, BadRequestErr
 	}
+	v.Author = p.CurrentUser
 	err = models.CreateProject(&v)
 	if err != nil {
 		log.Error(err)

@@ -8,17 +8,17 @@ import (
 	"github.com/showntop/tripper/controllers"
 )
 
-func WrapErrorResp(err *controllers.HttpError) []byte {
+func WrapErrorResp(err *controllers.HttpError) string {
 	output := []byte(`{
 		"message": "response json error",
-		"state_code": 503
+		"status": 503
 		}`)
 	output, _ = json.Marshal(map[string]interface{}{
-		"state_code": err.Code,
-		"message":    err.Message,
+		"status":  err.Code,
+		"message": err.Message,
 	})
 
-	return output
+	return string(output)
 }
 
 func Instrument() *httprouter.Router {

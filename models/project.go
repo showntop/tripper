@@ -25,12 +25,7 @@ type Project struct {
 
 	IsDaily bool `bson:"is_daily" json:"-"`
 
-	Author struct {
-		Id          string `bson:"id" json:"id"`
-		Name        string `bson:"name" json:"name"`
-		Avatar      string `bson:"avatar" json:"avatar"`
-		Description string `bson:"description" json:"description"`
-	} `bson:"author" json:"author"`
+	Author *User `bson:"author" json:"author"`
 }
 
 func CreateProject(p *Project) error {
