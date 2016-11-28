@@ -10,7 +10,7 @@ import (
 )
 
 type Albums struct {
-	*application
+	application
 }
 
 func (c *Albums) List(req *http.Request) ([]byte, *HttpError) {

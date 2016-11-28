@@ -46,6 +46,9 @@ func (p *Projects) Create(req *http.Request) ([]byte, *HttpError) {
 	if err != nil {
 		return nil, BadRequestErr
 	}
+	if err := v.Validate(); err != nil {
+		return nil, BadRequestErr
+	}
 	v.Author = p.CurrentUser
 	err = models.CreateProject(&v)
 	if err != nil {

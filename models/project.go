@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"time"
 
 	"gopkg.in/mgo.v2/bson"
@@ -26,6 +27,16 @@ type Project struct {
 	IsDaily bool `bson:"is_daily" json:"-"`
 
 	Author *User `bson:"author" json:"author"`
+}
+
+func (p *Project) Validate() error {
+	if len(p.Title) <= 0 {
+		return fmt.Errorf("project validate: %s", "title length < 1")
+	}
+	if len(p.Content) < 50 {
+		return fmt.Errorf("project validate: %s", "content length < 50")
+	}
+	return nil
 }
 
 func CreateProject(p *Project) error {

@@ -3,9 +3,9 @@ package models
 import ()
 
 type User struct {
-	Id          int64
+	Id          string `json:"id"`
 	Username    string `json:"username"`
-	Name        string `json:"name"`
+	Nickname    string `json:"nickname"`
 	Email       string `json:"email"`
 	Mobile      string `json:"mobile"`
 	Avatar      string `json:"avatar"`

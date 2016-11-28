@@ -6,7 +6,7 @@ import (
 )
 
 type Qntokens struct {
-	*application
+	application
 }
 
 func (q *Qntokens) Create() ([]byte, *HttpError) {

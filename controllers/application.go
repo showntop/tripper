@@ -49,6 +49,17 @@ func WrapResp(data interface{}) ([]byte, *HttpError) {
 }
 
 func (a *application) AuthUser(req *http.Request) error {
+
+	////for test
+	a.CurrentUser = &models.User{
+		Id:       "test",
+		Avatar:   "http://i2.letvimg.com/lc07_user/201605/09/15/14/1923203311462778080_70_70.jpg",
+		Nickname: "黑色的风",
+		Gender:   1,
+	}
+	return nil
+	////
+
 	ssoReq, err := http.NewRequest("GET", SSO_URL, nil)
 	if err != nil {
 		return err
