@@ -20,7 +20,7 @@
 	"default_locale": "zh-cn",
 	"log_level": 5,
 	"env": "develop",
-	"log_path":"./log/develop.log",
+	"log_path":"./log/production.log",
     "tmpl_path": "./views",
     "i18n_path": "",
 	"server_port": ":7007"
