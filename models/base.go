@@ -17,4 +17,6 @@ const (
 
 	C_PROJECT_NAME = "projects"
 	C_ALBUM_NAME   = "albums"
+	C_TOPIC_NAME   = "topics"
+	C_POST_NAME    = "posts"
 )

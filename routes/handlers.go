@@ -67,6 +67,78 @@ func showProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	rw.Write(results)
 }
 
+func listTopic(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	postsC := new(controllers.Topics)
+	results, err := postsC.List(req)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
+func createTopic(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	postsC := new(controllers.Topics)
+	results, err := postsC.Create(req)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
+func showTopic(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	postsC := new(controllers.Topics)
+	results, err := postsC.Show(req, ps)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
+func listPost(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	// rw.Header().Set("Content-Type", "application/json")
+	// postsC := new(controllers.Posts)
+	// results, err := postsC.List(req)
+	// if err != nil {
+	// 	http.Error(rw, err.Error(), err.Code)
+	// 	// rw.Write(WrapErrorResp(err))
+	// 	return
+	// }
+	// rw.Write(results)
+}
+
+func createPost(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	postsC := new(controllers.Posts)
+	results, err := postsC.Create(req)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
+func showPost(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	// rw.Header().Set("Content-Type", "application/json")
+	// postsC := new(controllers.Posts)
+	// results, err := postsC.Show(req, ps)
+	// if err != nil {
+	// 	http.Error(rw, err.Error(), err.Code)
+	// 	// rw.Write(WrapErrorResp(err))
+	// 	return
+	// }
+	// rw.Write(results)
+}
+
 func createQntoken(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	qntokensC := new(controllers.Qntokens)
