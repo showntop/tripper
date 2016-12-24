@@ -47,10 +47,10 @@ func CreateProject(p *Project) error {
 	p.CreatedAt = time.Now()
 	p.UpdatedAt = time.Now()
 	var endPos int = 20
-	if len(p.Content) < 20 {
-		endPos = len(p.Content)
+	if len([]rune(p.Content)) < 20 {
+		endPos = len([]rune(p.Content))
 	}
-	p.Intro = p.Content[:endPos]
+	p.Intro = string([]rune(p.Content)[:endPos])
 	return sess.DB(DBNAME).C(C_PROJECT_NAME).Insert(p)
 }
 
