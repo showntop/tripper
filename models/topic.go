@@ -10,8 +10,8 @@ type Topic struct {
 	Base `bson:",inline"`
 
 	Title   string `bson:"title" json:"title"`
-	Content string `bson:"content,omitempty" json:"content"`
-	Posts   []Post
+	Content string `bson:"content" json:"content"`
+	Posts   []Post `bson:"-" json:"posts"`
 
 	Author *User `bson:"author" json:"author"`
 }
@@ -37,7 +37,7 @@ func GetTopics() ([]*Topic, error) {
 	defer sess.Close()
 
 	var result []*Topic = make([]*Topic, 0)
-	err := sess.DB(DBNAME).C(C_TOPIC_NAME).Find(nil).Sort("-created_at").Limit(10).Select(bson.M{"content": 0}).All(&result)
+	err := sess.DB(DBNAME).C(C_TOPIC_NAME).Find(nil).Sort("-created_at").Limit(10).All(&result)
 
 	return result, err
 }

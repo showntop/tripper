@@ -3,9 +3,9 @@
 		
 	},
 	"database":{
-		"addrs":     "ds147777.mlab.com:47777",
-		"user":     "showntop",
-		"password": "xrt310214@tz",
+		"addrs":     "127.0.0.1:27017",
+		"user":     "",
+		"password": "",
 		"dbname":   "tripper"
 	},
 	"redis": {

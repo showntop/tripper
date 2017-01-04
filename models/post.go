@@ -8,8 +8,8 @@ import (
 
 type Post struct {
 	Base
-	TopicId    bson.ObjectId  `json:"topic_id"`
-	Content    string         `json:"content"`
+	TopicId    bson.ObjectId  `bson:"topic_id" json:"topic_id"`
+	Content    string         `bson:"content" json:"content"`
 	Comments   []*PostComment `json:"comments"`
 	LikeNum    int            `json:"like_num"`
 	CommentNum int            `json:"comment_num"`
