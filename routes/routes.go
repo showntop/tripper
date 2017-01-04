@@ -24,6 +24,8 @@ func WrapErrorResp(err *controllers.HttpError) string {
 func Instrument() *httprouter.Router {
 	router := httprouter.New()
 
+	router.GET("/api/v1/users/me/albums", listUserAlbum)
+
 	router.GET("/api/v1/albums", listAlbum)
 	router.POST("/api/v1/albums", createAlbum)
 

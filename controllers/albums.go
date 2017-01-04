@@ -15,7 +15,7 @@ type Albums struct {
 
 func (c *Albums) List(req *http.Request) ([]byte, *HttpError) {
 
-	data, err := models.GetAlbums()
+	data, err := models.GetAlbums(nil)
 	if err != nil {
 		log.Error(err)
 		return nil, DBErr
@@ -24,12 +24,18 @@ func (c *Albums) List(req *http.Request) ([]byte, *HttpError) {
 }
 
 func (c *Albums) Create(req *http.Request) ([]byte, *HttpError) {
+	if err := c.AuthUser(req); err != nil {
+		return nil, UnAuthErr
+	}
+
 	var v models.Album
 	decoder := json.NewDecoder(req.Body)
 	err := decoder.Decode(&v)
 	if err != nil {
 		return nil, BadRequestErr
 	}
+
+	v.Owner = c.CurrentUser
 
 	err = models.CreateAlbum(&v)
 	if err != nil {

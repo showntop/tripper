@@ -7,6 +7,18 @@ import (
 	"github.com/showntop/tripper/controllers"
 )
 
+func listUserAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	usersC := new(controllers.Users)
+	results, err := usersC.ListAlbums(req)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
 func listAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	albumsC := new(controllers.Albums)

@@ -7,9 +7,9 @@ import (
 )
 
 type Album struct {
-	Base `bson:",inline"`
-
-	Name string `bson:"name" json:"name"`
+	Base  `bson:",inline"`
+	Owner *User  `bson:"owner" json:"owner"`
+	Name  string `bson:"name" json:"name"`
 }
 
 func CreateAlbum(v *Album) error {
@@ -23,12 +23,12 @@ func CreateAlbum(v *Album) error {
 	return sess.DB(DBNAME).C(C_ALBUM_NAME).Insert(v)
 }
 
-func GetAlbums() ([]*Album, error) {
+func GetAlbums(query bson.M) ([]*Album, error) {
 	sess := MgoSess()
 	defer sess.Close()
 
 	var result []*Album = make([]*Album, 0)
-	err := sess.DB(DBNAME).C(C_ALBUM_NAME).Find(nil).All(&result)
+	err := sess.DB(DBNAME).C(C_ALBUM_NAME).Find(query).All(&result)
 
 	return result, err
 }
