@@ -1,7 +1,7 @@
-# journey
+# tripper
 ==========
 
-apps share and perfect
+shares your inner world with others
 
 ##requirement
 
