@@ -40,12 +40,13 @@ type ProjectComment struct {
 	Base      `bson:",inline"`
 	ProjectId string `bson:"project_id" json:"project_id"`
 	Content   string `bson:"content" json:"content"`
+	Commentor *User  `bson:"commentor" json:"commentor"`
 }
 
 type ProjectLike struct {
 	Base      `bson:",inline"`
 	ProjectId string `bson:"project_id" json:"project_id"`
-	Liker     User   `bson:"content" json:"content"`
+	Liker     *User  `bson:"liker" json:"liker"`
 }
 
 func (p *Project) Validate() error {
@@ -116,4 +117,32 @@ func GetProjectById(id string) (*Project, error) {
 	err = sess.DB(DBNAME).C(C_PROJECT_COMMENT_NAME).Find(bson.M{"project_id": id}).Limit(20).All(&result.Comments)
 
 	return result, err
+}
+
+func CreateProjectLike(pl *ProjectLike) error {
+	sess := MgoSess()
+	defer sess.Close()
+
+	if !pl.Id.Valid() {
+		pl.Id = bson.NewObjectId()
+	}
+
+	_, err := sess.DB(DBNAME).C(C_PROJECT_LIKE_NAME).Upsert(bson.M{"project_id": pl.ProjectId, "liker.id": pl.Liker.Id}, bson.M{"$set": pl})
+	if err != nil {
+		return err
+	}
+
+	return err
+}
+
+func DeleteProjectLike(pl *ProjectLike) error {
+	sess := MgoSess()
+	defer sess.Close()
+
+	err := sess.DB(DBNAME).C(C_PROJECT_LIKE_NAME).Remove(bson.M{"project_id": pl.ProjectId, "liker.id": pl.Liker.Id})
+	if err != nil {
+		return err
+	}
+
+	return err
 }

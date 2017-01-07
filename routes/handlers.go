@@ -95,6 +95,30 @@ func createProjectComment(rw http.ResponseWriter, req *http.Request, ps httprout
 	rw.Write(results)
 }
 
+func createProjectLike(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	projectsC := new(controllers.Projects)
+	results, err := projectsC.CreateLike(req, ps)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
+func deleteProjectLike(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	projectsC := new(controllers.Projects)
+	results, err := projectsC.DeleteLike(req, ps)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
 func listTopic(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	postsC := new(controllers.Topics)

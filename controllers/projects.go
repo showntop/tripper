@@ -87,3 +87,40 @@ func (p *Projects) CreateComment(req *http.Request, ps httprouter.Params) ([]byt
 	}
 	return WrapResp(comment)
 }
+
+func (p *Projects) CreateLike(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
+	if err := p.AuthUser(req); err != nil {
+		log.Warnln(err)
+		return nil, UnAuthErr
+	}
+	projectId := ps.ByName("id")
+	if projectId == "" {
+		return nil, &HttpError{Code: 429, Message: "content not exist"}
+	}
+	var v models.ProjectLike = models.ProjectLike{ProjectId: projectId, Liker: p.CurrentUser}
+
+	err := models.CreateProjectLike(&v)
+	if err != nil {
+		log.Error(err)
+		return nil, DBErr
+	}
+	return WrapResp(v)
+}
+
+func (p *Projects) DeleteLike(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
+	if err := p.AuthUser(req); err != nil {
+		log.Warnln(err)
+		return nil, UnAuthErr
+	}
+	projectId := ps.ByName("id")
+	if projectId == "" {
+		return nil, &HttpError{Code: 429, Message: "content not exist"}
+	}
+	var v models.ProjectLike = models.ProjectLike{ProjectId: projectId, Liker: p.CurrentUser}
+	err := models.DeleteProjectLike(&v)
+	if err != nil {
+		log.Error(err)
+		return nil, DBErr
+	}
+	return WrapResp(v)
+}
