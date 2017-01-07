@@ -115,8 +115,12 @@ func GetProjectById(id string) (*Project, error) {
 	if err != nil {
 		return result, err
 	}
+	result.Comments = make([]ProjectComment, 0)
 	err = sess.DB(DBNAME).C(C_PROJECT_COMMENT_NAME).Find(bson.M{"project_id": id}).Limit(20).All(&result.Comments)
+	if result.Comments == nil {
+		result.Comments = make([]ProjectComment, 0)
 
+	}
 	return result, err
 }
 
