@@ -26,6 +26,11 @@ type Project struct {
 
 	IsDaily bool `bson:"is_daily" json:"-"`
 
+	Album  struct{
+		Id string `bson:"id" json:"id"`
+		Name string `bson:"name" json:"name"`
+	} `bson:"album" json:album`
+
 	Author *User `bson:"author" json:"author"`
 }
 
