@@ -15,8 +15,10 @@ type Base struct {
 const (
 	DBNAME = "tripper"
 
-	C_PROJECT_NAME = "projects"
-	C_ALBUM_NAME   = "albums"
-	C_TOPIC_NAME   = "topics"
-	C_POST_NAME    = "posts"
+	C_PROJECT_NAME         = "projects"
+	C_PROJECT_COMMENT_NAME = "project_comments"
+	C_PROJECT_LIKE_NAME    = "project_likes"
+	C_ALBUM_NAME           = "albums"
+	C_TOPIC_NAME           = "topics"
+	C_POST_NAME            = "posts"
 )

@@ -67,3 +67,23 @@ func (p *Projects) Recommend(req *http.Request) ([]byte, *HttpError) {
 	}
 	return WrapResp(data)
 }
+
+func (p *Projects) CreateComment(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
+	projectId := ps.ByName("id")
+	if projectId == "" {
+		return nil, &HttpError{Code: 429, Message: "content not exist"}
+	}
+	var v map[string]string
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&v)
+	if err != nil {
+		return nil, BadRequestErr
+	}
+	comment := models.ProjectComment{ProjectId: projectId, Content: v["content"]}
+	err = models.CreateProjectComment(&comment)
+	if err != nil {
+		log.Error(err)
+		return nil, DBErr
+	}
+	return WrapResp(comment)
+}

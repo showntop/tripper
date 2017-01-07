@@ -33,6 +33,9 @@ func Instrument() *httprouter.Router {
 	router.POST("/api/v1/projects", createProject)
 	router.GET("/api/v1/projects/:id", showProject)
 
+	router.GET("/api/v1/projects/:id/comments", listProjectComment)
+	router.POST("/api/v1/projects/:id/comments", createProjectComment)
+
 	router.GET("/api/v1/posts", listPost)
 	router.POST("/api/v1/posts", createPost)
 	router.GET("/api/v1/posts/:id", showPost)

@@ -26,12 +26,26 @@ type Project struct {
 
 	IsDaily bool `bson:"is_daily" json:"-"`
 
-	Album  struct{
-		Id string `bson:"id" json:"id"`
+	Album struct {
+		Id   string `bson:"id" json:"id"`
 		Name string `bson:"name" json:"name"`
 	} `bson:"album" json:"album"`
 
 	Author *User `bson:"author" json:"author"`
+
+	Comments []ProjectComment `bson:"-" json:"comments"`
+}
+
+type ProjectComment struct {
+	Base      `bson:",inline"`
+	ProjectId string `bson:"project_id" json:"project_id"`
+	Content   string `bson:"content" json:"content"`
+}
+
+type ProjectLike struct {
+	Base      `bson:",inline"`
+	ProjectId string `bson:"project_id" json:"project_id"`
+	Liker     User   `bson:"content" json:"content"`
 }
 
 func (p *Project) Validate() error {
@@ -57,6 +71,17 @@ func CreateProject(p *Project) error {
 	}
 	p.Intro = string([]rune(p.Content)[:endPos])
 	return sess.DB(DBNAME).C(C_PROJECT_NAME).Insert(p)
+}
+
+func CreateProjectComment(pc *ProjectComment) error {
+	sess := MgoSess()
+	defer sess.Close()
+
+	pc.Id = bson.NewObjectId()
+	pc.CreatedAt = time.Now()
+	pc.UpdatedAt = time.Now()
+
+	return sess.DB(DBNAME).C(C_PROJECT_COMMENT_NAME).Insert(pc)
 }
 
 func GetPorjectsSelected() ([]*Project, error) {
@@ -85,6 +110,10 @@ func GetProjectById(id string) (*Project, error) {
 
 	result := new(Project)
 	err := sess.DB(DBNAME).C(C_PROJECT_NAME).FindId(bson.ObjectIdHex(id)).One(result)
+	if err != nil {
+		return result, err
+	}
+	err = sess.DB(DBNAME).C(C_PROJECT_COMMENT_NAME).Find(bson.M{"project_id": id}).Limit(20).All(&result.Comments)
 
 	return result, err
 }

@@ -79,6 +79,22 @@ func showProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	rw.Write(results)
 }
 
+func listProjectComment(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+
+}
+
+func createProjectComment(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	projectsC := new(controllers.Projects)
+	results, err := projectsC.CreateComment(req, ps)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
 func listTopic(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	postsC := new(controllers.Topics)
