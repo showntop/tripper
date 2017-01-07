@@ -40,7 +40,6 @@ func init() {
 }
 
 func createIndexes() {
-
 	//status 稀疏索引
 	//stime etime索引
 

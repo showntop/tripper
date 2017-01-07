@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -123,11 +124,7 @@ func CreateProjectLike(pl *ProjectLike) error {
 	sess := MgoSess()
 	defer sess.Close()
 
-	if !pl.Id.Valid() {
-		pl.Id = bson.NewObjectId()
-	}
-
-	_, err := sess.DB(DBNAME).C(C_PROJECT_LIKE_NAME).Upsert(bson.M{"project_id": pl.ProjectId, "liker.id": pl.Liker.Id}, bson.M{"$set": pl})
+	_, err := sess.DB(DBNAME).C(C_PROJECT_LIKE_NAME).Upsert(bson.M{"project_id": pl.ProjectId, "liker.id": pl.Liker.Id}, bson.M{"$set": bson.M{"project_id": pl.ProjectId, "liker": pl.Liker}})
 	if err != nil {
 		return err
 	}
@@ -140,9 +137,9 @@ func DeleteProjectLike(pl *ProjectLike) error {
 	defer sess.Close()
 
 	err := sess.DB(DBNAME).C(C_PROJECT_LIKE_NAME).Remove(bson.M{"project_id": pl.ProjectId, "liker.id": pl.Liker.Id})
-	if err != nil {
+	if err != nil && err != mgo.ErrNotFound {
 		return err
 	}
 
-	return err
+	return nil
 }
