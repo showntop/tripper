@@ -5,12 +5,24 @@ import (
 	"net/http"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/julienschmidt/httprouter"
+	"gopkg.in/mgo.v2/bson"
 
 	"github.com/showntop/tripper/models"
 )
 
 type Albums struct {
 	application
+}
+
+func (c *Albums) Show(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
+
+	data, err := models.GetAlbumById(bson.ObjectIdHex(ps.ByName("id")))
+	if err != nil {
+		log.Error(err)
+		return nil, DBErr
+	}
+	return WrapResp(data)
 }
 
 func (c *Albums) List(req *http.Request) ([]byte, *HttpError) {

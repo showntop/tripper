@@ -19,6 +19,18 @@ func listUserAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Para
 	rw.Write(results)
 }
 
+func showAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	albumsC := new(controllers.Albums)
+	results, err := albumsC.Show(req, ps)
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
 func listAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	albumsC := new(controllers.Albums)

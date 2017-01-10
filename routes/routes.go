@@ -27,6 +27,7 @@ func Instrument() *httprouter.Router {
 	router.GET("/api/v1/users/me/albums", listUserAlbum)
 
 	router.GET("/api/v1/albums", listAlbum)
+	router.GET("/api/v1/albums/:id", showAlbum)
 	router.POST("/api/v1/albums", createAlbum)
 
 	router.GET("/api/v1/projects", listProject)
