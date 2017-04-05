@@ -96,6 +96,16 @@ func GetPorjectsSelected() ([]*Project, error) {
 	return result, err
 }
 
+func GetPorjectsByCategory(categoryId int) ([]*Project, error) {
+	sess := MgoSess()
+	defer sess.Close()
+
+	var result []*Project = make([]*Project, 0)
+	err := sess.DB(DBNAME).C(C_PROJECT_NAME).Find(bson.M{"category": categoryId}).Sort("-created_at").Select(bson.M{"content": 0}).All(&result)
+
+	return result, err
+}
+
 func GetProjectDaily() (*Project, error) {
 	sess := MgoSess()
 	defer sess.Close()

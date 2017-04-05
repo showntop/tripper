@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/julienschmidt/httprouter"
@@ -16,11 +17,15 @@ type Projects struct {
 
 func (p *Projects) List(req *http.Request) ([]byte, *HttpError) {
 	query := req.URL.Query()
-	if recommended := query.Get("daily"); recommended != "" {
-		return p.Recommend(req)
-	}
 
-	data, err := models.GetPorjectsSelected()
+	var data []*models.Project
+	var err error
+	if category := query.Get("category"); category != "" {
+		categoryi,_ := strconv.Atoi(category)
+		data, err = models.GetPorjectsByCategory(categoryi)
+	}else{
+		data, err = models.GetPorjectsSelected()
+	}
 	if err != nil {
 		return nil, DBErr
 	}

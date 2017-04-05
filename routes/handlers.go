@@ -55,6 +55,18 @@ func createAlbum(rw http.ResponseWriter, req *http.Request, ps httprouter.Params
 	rw.Write(results)
 }
 
+func listCategory(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	rw.Header().Set("Content-Type", "application/json")
+	categoryC := new(controllers.Categories)
+	results, err := categoryC.List()
+	if err != nil {
+		http.Error(rw, err.Error(), err.Code)
+		// rw.Write(WrapErrorResp(err))
+		return
+	}
+	rw.Write(results)
+}
+
 func listProject(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	rw.Header().Set("Content-Type", "application/json")
 	projectsC := new(controllers.Projects)

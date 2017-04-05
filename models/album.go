@@ -29,7 +29,7 @@ func GetAlbums(query bson.M) ([]*Album, error) {
 	defer sess.Close()
 
 	var result []*Album = make([]*Album, 0)
-	err := sess.DB(DBNAME).C(C_ALBUM_NAME).Find(query).All(&result)
+	err := sess.DB(DBNAME).C(C_ALBUM_NAME).Find(query).Limit(10).All(&result)
 
 	return result, err
 }
