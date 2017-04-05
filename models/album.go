@@ -40,7 +40,7 @@ func GetAlbumById(id bson.ObjectId) (*Album, error) {
 
 	var result Album
 	err := sess.DB(DBNAME).C(C_ALBUM_NAME).FindId(id).One(&result)
-	err = sess.DB(DBNAME).C(C_PROJECT_NAME).Find(bson.M{"album.id": id.Hex()}).All(&result.Projects)
+	err = sess.DB(DBNAME).C(C_PROJECT_NAME).Find(bson.M{"album.id": id.Hex()}).Limit(20).All(&result.Projects)
 
 	return &result, err
 }
