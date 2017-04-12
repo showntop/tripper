@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 
@@ -13,8 +14,15 @@ type Feeds struct {
 }
 
 func (c *Feeds) List(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
-
-	data, err := models.ListFeeds()
+	pageNo, _ := strconv.Atoi(req.URL.Query().Get("page_no"))
+	pageNum, _ := strconv.Atoi(req.URL.Query().Get("page_num"))
+	if pageNo == 0 {
+		pageNo = 1
+	}
+	if pageNum == 0 {
+		pageNum = 10
+	}
+	data, err := models.ListFeeds(pageNo, pageNum)
 	if err != nil {
 		return nil, DBErr
 	}

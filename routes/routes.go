@@ -26,7 +26,7 @@ func WrapErrorResp(err *c.HttpError) string {
 
 func construct(controller interface{}, action string) func(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	return func(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-		rw.Header().Set("Content-Type", "application/json")
+		rw.Header().Set("Content-Type", "text/plain")
 
 		param1 := reflect.ValueOf(req)
 		param2 := reflect.ValueOf(ps)

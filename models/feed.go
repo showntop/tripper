@@ -20,12 +20,12 @@ type Feed struct {
 	Author *User `bson:"author" json:"author"`
 }
 
-func ListFeeds() ([]*Project, error) {
+func ListFeeds(skip, limit int) ([]*Project, error) {
 	sess := MgoSess()
 	defer sess.Close()
 
 	var result []*Project = make([]*Project, 0)
-	err := sess.DB(DBNAME).C(C_PROJECT_NAME).Find(nil).Sort("-created_at").Limit(10).Select(bson.M{"content": 0}).All(&result)
+	err := sess.DB(DBNAME).C(C_PROJECT_NAME).Find(nil).Sort("-created_at").Skip(skip).Limit(limit).Select(bson.M{"content": 0}).All(&result)
 
 	return result, err
 }
