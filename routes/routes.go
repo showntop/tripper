@@ -31,8 +31,12 @@ func construct(controller interface{}, action string) func(rw http.ResponseWrite
 		param1 := reflect.ValueOf(req)
 		param2 := reflect.ValueOf(ps)
 
-		rC := reflect.ValueOf(controller)
-		results := rC.MethodByName(action).Call([]reflect.Value{param1, param2})
+		rCf := reflect.ValueOf(controller).MethodByName(action)
+		if !rCf.IsValid() {
+			http.Error(rw, "there's no a valid handler defined.", http.StatusInternalServerError)
+			return
+		}
+		results := rCf.Call([]reflect.Value{param1, param2})
 		log.Debugf("controller:%T, action:%s", controller, action)
 		err := results[1].Interface().(*c.HttpError)
 		if err != nil {
@@ -47,7 +51,7 @@ func construct(controller interface{}, action string) func(rw http.ResponseWrite
 func Instrument() *httprouter.Router {
 	router := httprouter.New()
 
-	// router.GET("/api/v1/feeds", construct(new(controller.Feeds, ""listFeed"")))
+	router.GET("/api/v1/feeds", construct(&c.Feeds{}, "List"))
 
 	router.GET("/api/v1/users/me/albums", construct(new(c.Users), "ListAlbums"))
 
