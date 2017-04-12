@@ -21,6 +21,10 @@ type Middleware struct {
 	// AfterFilters  []*Filter//TODO
 }
 
+func (m *Middleware) Route(method, path, controller, action string) {
+
+}
+
 func (m *Middleware) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	dump, _ := httputil.DumpRequest(req, true)
 

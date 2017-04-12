@@ -15,15 +15,15 @@ type Projects struct {
 	application
 }
 
-func (p *Projects) List(req *http.Request) ([]byte, *HttpError) {
+func (p *Projects) List(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	query := req.URL.Query()
 
 	var data []*models.Project
 	var err error
 	if category := query.Get("category"); category != "" {
-		categoryi,_ := strconv.Atoi(category)
+		categoryi, _ := strconv.Atoi(category)
 		data, err = models.GetPorjectsByCategory(categoryi)
-	}else{
+	} else {
 		data, err = models.GetPorjectsSelected()
 	}
 	if err != nil {
@@ -40,7 +40,7 @@ func (p *Projects) Show(req *http.Request, ps httprouter.Params) ([]byte, *HttpE
 	return WrapResp(data)
 }
 
-func (p *Projects) Create(req *http.Request) ([]byte, *HttpError) {
+func (p *Projects) Create(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	if err := p.AuthUser(req); err != nil {
 		log.Warnln(err)
 		return nil, UnAuthErr
@@ -63,7 +63,7 @@ func (p *Projects) Create(req *http.Request) ([]byte, *HttpError) {
 	return WrapResp(v)
 }
 
-func (p *Projects) Recommend(req *http.Request) ([]byte, *HttpError) {
+func (p *Projects) Recommend(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 
 	data, err := models.GetProjectDaily()
 	if err != nil {

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/julienschmidt/httprouter"
 
 	"github.com/showntop/tripper/models"
 )
@@ -13,7 +14,7 @@ type Posts struct {
 	application
 }
 
-func (p *Posts) Create(req *http.Request) ([]byte, *HttpError) {
+func (p *Posts) Create(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	if err := p.AuthUser(req); err != nil {
 		return nil, UnAuthErr
 	}

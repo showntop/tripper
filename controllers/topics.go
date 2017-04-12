@@ -14,7 +14,7 @@ type Topics struct {
 	application
 }
 
-func (p *Topics) Create(req *http.Request) ([]byte, *HttpError) {
+func (p *Topics) Create(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	if err := p.AuthUser(req); err != nil {
 		return nil, UnAuthErr
 	}
@@ -47,7 +47,7 @@ func (t *Topics) Show(req *http.Request, ps httprouter.Params) ([]byte, *HttpErr
 	return WrapResp(v)
 }
 
-func (t *Topics) List(req *http.Request) ([]byte, *HttpError) {
+func (t *Topics) List(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	v, err := models.GetTopics()
 	if err != nil {
 		log.Error(err)

@@ -25,7 +25,7 @@ func (c *Albums) Show(req *http.Request, ps httprouter.Params) ([]byte, *HttpErr
 	return WrapResp(data)
 }
 
-func (c *Albums) List(req *http.Request) ([]byte, *HttpError) {
+func (c *Albums) List(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 
 	data, err := models.GetAlbums(nil)
 	if err != nil {
@@ -35,7 +35,7 @@ func (c *Albums) List(req *http.Request) ([]byte, *HttpError) {
 	return WrapResp(data)
 }
 
-func (c *Albums) Create(req *http.Request) ([]byte, *HttpError) {
+func (c *Albums) Create(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	if err := c.AuthUser(req); err != nil {
 		return nil, UnAuthErr
 	}

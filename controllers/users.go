@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/julienschmidt/httprouter"
 	"github.com/showntop/tripper/models"
 	"gopkg.in/mgo.v2/bson"
 	log "qiniupkg.com/x/log.v7"
@@ -12,7 +13,7 @@ type Users struct {
 	application
 }
 
-func (c *Users) ListAlbums(req *http.Request) ([]byte, *HttpError) {
+func (c *Users) ListAlbums(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	if err := c.AuthUser(req); err != nil {
 		return nil, UnAuthErr
 	}

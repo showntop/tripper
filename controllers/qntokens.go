@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 	"qiniupkg.com/api.v7/conf"
 	"qiniupkg.com/api.v7/kodo"
 )
@@ -9,7 +12,7 @@ type Qntokens struct {
 	application
 }
 
-func (q *Qntokens) Create() ([]byte, *HttpError) {
+func (q *Qntokens) Create(req *http.Request, ps httprouter.Params) ([]byte, *HttpError) {
 	//初始化AK，SK
 	conf.ACCESS_KEY = "FKj0IPQwM3gquMCFBSQjYI_1EGxb-8sASTh30--U"
 	conf.SECRET_KEY = "t938V-cIGD6GFZWhS2VxsVWmZ1S06lWVrFKgKtsS"
