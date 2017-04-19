@@ -23,9 +23,16 @@ type Feed struct {
 func ListFeeds(skip, limit int) ([]*Project, error) {
 	sess := MgoSess()
 	defer sess.Close()
+	// fetch all needed resources
 
+	// needed show temply
+
+	// prefect albums
+
+	// prefect projects
 	var result []*Project = make([]*Project, 0)
 	err := sess.DB(DBNAME).C(C_PROJECT_NAME).Find(nil).Sort("-created_at").Skip(skip).Limit(limit).Select(bson.M{"content": 0}).All(&result)
+	// split to N group
 
 	return result, err
 }
